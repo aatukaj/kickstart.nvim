@@ -9,12 +9,10 @@ return {
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
   },
-  cmd = 'Neotree',
-  keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
-  },
+  -- cmd = 'Neotree',
   opts = {
     filesystem = {
+      follow_current_file = { enabled = true },
       window = {
         mappings = {
           ['\\'] = 'close_window',
@@ -22,4 +20,9 @@ return {
       },
     },
   },
+  config = function()
+    require('neo-tree').setup {
+      vim.keymap.set('n', '<leader>f', '<cmd>Neotree toggle current<CR>', { desc = 'Show file browser' }),
+    }
+  end,
 }
